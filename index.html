@@ -1,13 +1,309 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>  
-    <meta charset="utf-8" />
+<html>
+	<head>
+	<meta charset="utf-8" />
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
-    <title>Лабораторная работа 6</title>
-    <link rel="stylesheet" href="https://www.x3dom.org/download/x3dom.css" />
-    <script src="https://www.x3dom.org/download/x3dom.js"></script>
+    <title>Лабораторная работа номер 6</title>
+    <link rel="stylesheet" href="http://www.x3dom.org/download/dev/x3dom.css" />
+    <script src="http://www.x3dom.org/download/dev/x3dom.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+      function toggle(what)
+      {
+        var button = (what=="pend1")?document.getElementById("but_e"):document.getElementById("but_m");
+        var TS = (what=="pend1")?document.getElementById("clock1"):document.getElementById("clock2");
+        var clock1nabled = TS.getAttribute("enabled");
+        if (clock1nabled == "true") {
+            TS.setAttribute("enabled", "false");
+            button.value = (what=="pend1")?"Запустить Венеру":"Запустить землю";
+        }
+        else {
+            TS.setAttribute("enabled", "true");
+            button.value = (what=="pend1")?"Остановить Венеру":"Остановить Землю";
+        }
+      }
+      function slowdown()
+      {
+		var clock = $("#clock2");
+		clock.attr("enabled", "false");
+		clock.attr("cycleInterval", parseInt(clock.attr("cycleInterval"))*2);
+		clock.attr("enabled", "true");
+      }
+      function changeSpeed(n)
+      {
+        document.getElementById("clock2").setAttribute("enabled", "false");
+        document.getElementById("clock2").setAttribute("cycleInterval", n);
+        document.getElementById("clock2").setAttribute("enabled", "true");
+      }
+	 
+      function move(item, point) {
+        if (item) {document.getElementById(item).setAttribute('set_destination', point[0]+' '+parseFloat(point[1]+1)+' '+point[2])}; 
+      }
+    </script>
   </head>
-  <body>
-    <h1>Здесь только я. А должна быть твоя лаба!</h1>
-  </body> 
+	<body>
+		
+		<style type="text/css">
+			body{padding:0;margin:0;}
+			X3D{left:0px; top:0px; width:100%; height:100%; border:none;}
+		</style>
+<div>
+<X3D>
+<Scene onClick="move('pend323', event.hitPnt);">
+<!-- sun -->
+		
+	<transform DEF="global" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+		  
+		<transform DEF="pend32" id='pend32'  rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<shape >
+				<appearance><ImageTexture url="sun.png"></ImageTexture></appearance>
+				<Sphere Radius='1' ></Sphere>
+			</shape>
+		</transform>
+
+
+
+		<!-- venus -->
+		
+		<transform DEF="pend" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='2 0 0'>
+				<shape>
+					<appearance><ImageTexture url="mercury.png"></ImageTexture></appearance>
+					<Sphere Radius='0.1' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+			<!-- mrcury -->
+		<transform DEF="pend1" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='3 0 0'>
+				<shape>
+					<appearance><ImageTexture url="venus.png"></ImageTexture></appearance>
+					<Sphere Radius='0.2' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+			<!-- earth -->
+		<transform DEF="pend2" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='4 0 0'>
+				<shape>
+					<appearance><ImageTexture url="earth.png"></ImageTexture></appearance>
+					<Sphere Radius='0.2' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+			<!-- mars -->
+		<transform DEF="pend3" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='5 0 0'>
+				<shape>
+					<appearance><ImageTexture url="mars.png"></ImageTexture></appearance>
+					<Sphere Radius='0.1' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+		
+		<!-- jupiter -->
+		<transform DEF="pend4" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='9 0 0'>
+				<shape>
+					<appearance><ImageTexture url="jupiter.png"></ImageTexture></appearance>
+					<Sphere Radius='0.5' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+		
+		
+		<!-- saturn -->
+		<transform DEF="pend5" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='12 0 0'>
+				<shape>
+					<appearance><ImageTexture url="saturn.png"></ImageTexture></appearance>
+					<Sphere Radius='0.4' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+		
+		
+		<!-- uran -->
+		<transform DEF="pend6" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='15 0 0'>
+				<shape>
+					<appearance><ImageTexture url="uran.png"></ImageTexture></appearance>
+					<Sphere Radius='0.4' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+		
+		
+		<!-- neptun -->
+		<transform DEF="pend7" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='18 0 0'>
+				<shape>
+					<appearance><ImageTexture url="neptun.png"></ImageTexture></appearance>
+					<Sphere Radius='0.4' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+		
+		
+		<!-- pluto -->
+		<transform DEF="pend8" rotation='0 0 0 0' scale='1 1 1' translation='0 0 0'>
+			<transform rotation='0 0 0 0' scale='1 1 1' translation='23 0 0'>
+				<shape>
+					<appearance><ImageTexture url="pluto.png"></ImageTexture></appearance>
+					<Sphere Radius='0.2' ></Sphere>
+				</shape>
+			</transform>
+		</transform>
+	
+	</transform>
+	
+	<PositionChaser DEF='pend323' id='pend323' duration='1' initialDestination='0 0 0'></PositionChaser>
+	<ROUTE fromNode='pend323' fromField='value_changed' 
+       toNode='global' toField='set_translation'>
+	</ROUTE>
+	
+	
+	<timeSensor id="clock1" DEF='clock1' cycleInterval='4' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin1' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock1' toNode='spin1' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin1' toNode='pend1' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	<timeSensor id="clock2" DEF='clock2' cycleInterval='6' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin2' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock2' toNode='spin2' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin2' toNode='pend2' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	<timeSensor DEF='clock3' cycleInterval='7' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin3' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock3' toNode='spin3' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin3' toNode='pend3' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	<timeSensor DEF='clock4' cycleInterval='3' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin4' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock4' toNode='spin4' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin4' toNode='pend' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	
+	<timeSensor DEF='clock5' cycleInterval='16' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin5' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock5' toNode='spin5' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin5' toNode='pend4' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	
+	<timeSensor DEF='clock6' cycleInterval='18' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin6' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock6' toNode='spin6' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin6' toNode='pend5' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	
+	
+	<timeSensor DEF='clock7' cycleInterval='24' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin7' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock7' toNode='spin7' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin7' toNode='pend6' fromField='value_changed' toField='set_rotation'></ROUTE>
+	
+	   
+	   
+	<timeSensor DEF='clock8' cycleInterval='30' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin8' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock8' toNode='spin8' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin8' toNode='pend7' fromField='value_changed' toField='set_rotation'></ROUTE>
+	   
+	   
+	   
+	  <timeSensor DEF='clock9' cycleInterval='34' loop='true'></timeSensor>
+	<orientationInterpolator DEF='spin9' key='0 0.25 0.5 0.75 1' keyValue='0 1 0 0 0 1 0 1.57079 0 1 0 3.14159 0 1 0 4.71239 0 1 0 6.28317'></orientationInterpolator>
+	<ROUTE fromNode='clock9' toNode='spin9' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='spin9' toNode='pend8' fromField='value_changed' toField='set_rotation'></ROUTE>
+	    
+	   
+	   
+	   
+	
+	<transform DEF="decore">
+		<transform  rotation='1 0 0 1.57' scale='1 1 1' translation='0 0 0.05'>
+		<shape >
+			<appearance><material diffuseColor='#eee' DEF="decore_color"></material></appearance>
+			<sphere radius="0.09" ></sphere>
+		</shape>
+		</transform>
+		</transform>
+	
+	
+	
+	
+	
+
+	
+
+	
+	
+	<TimeSensor DEF='Time_decor' cycleInterval='40' loop='true'></TimeSensor>
+	<PositionInterpolator DEF='decor_position' key='0 0.25 0.5 0.75 1' keyValue='-10 0 0, 1 5 0, 10 0 0, -1 -5 0, -10 0 0, ' />
+	<ROUTE fromNode='Time_decor' toNode='decor_position' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='decor_position' toNode='decore' fromField='value_changed'  toField='translation'></ROUTE>
+	
+	<ColorInterpolator DEF='ColInt' key='0 0.25 0.5 0.75 1' keyValue='1 0 0, 0 1 0, 0 0 1, 1 0 0, 1 0 1' />
+	<ROUTE fromNode='Time_decor' toNode='ColInt' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='ColInt' toNode='decore_color' fromField='value_changed'  toField='set_diffuseColor'></ROUTE>
+	
+	<!--<TimeSensor DEF='Time' cycleInterval='3' loop='true'></TimeSensor>	
+	
+	<OrientationInterpolator DEF='pend_rotaion'  key='0.0 0.5 1.0' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 3.141 0.0 0.0 1 6.282'></OrientationInterpolator>
+		<ROUTE fromNode='Time' toNode='pend_rotaion' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='pend_rotaion' toNode='pend' fromField='value_changed'  toField='set_rotation'></ROUTE>
+	<TimeSensor DEF='Time' cycleInterval='3' loop='true'></TimeSensor>
+	<OrientationInterpolator DEF='pend_rotaion1'  key='0.0 0.5 1.0 ' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 3.141 0.0 0.0 1 6.282'></OrientationInterpolator>
+	<TimeSensor DEF='Time' cycleInterval='3' loop='true'></TimeSensor>
+	<OrientationInterpolator DEF='pend_rotaion2'  key='0.0 0.5 1.0 ' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 3.141 0.0 0.0 1 6.282'></OrientationInterpolator>
+	<OrientationInterpolator DEF='pend_rotaion3'  key='0.0 0.5 1.0 ' keyValue='0.0 0.0 1.0 0.0 0.0 0.0 1.0 3.141 0.0 0.0 1 6.282'></OrientationInterpolator>
+	
+		<ROUTE fromNode='Time' toNode='pend_rotaion1' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='pend_rotaion' toNode='pend1' fromField='value_changed'  toField='set_rotation'></ROUTE>
+	<ROUTE fromNode='Time' toNode='pend_rotaion2' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='pend_rotaion' toNode='pend2' fromField='value_changed'  toField='set_rotation'></ROUTE>
+	<ROUTE fromNode='Time' toNode='pend_rotaion3' fromField='fraction_changed' toField='set_fraction'></ROUTE>
+	<ROUTE fromNode='pend_rotaion' toNode='pend3' fromField='value_changed'  toField='set_rotation'></ROUTE>-->
+	
+	
+	
+	
+	
+	
+	
+	
+	<Background groundAngle='1.309 1.570796' groundColor='0 0 0.0 0 0 0 0 0 0' skyAngle='1.309 1.571' skyColor='0 0 0 0 0 0 0 0 0' 
+	
+	backUrl='"mountns1.png"'
+    frontUrl='"mountns1.png"'
+    leftUrl='"mountns1.png"'
+    rightUrl='" mountns1.png"' />
+	
+	<AudioClip url='"myAudioSource.mp3"' loop='true' enabled='true' />
+	
+	
+	
+	
+	
+</Scene>
+</X3D>
+</div>
+<div style="color: #fff; position: absolute">
+	<div>
+      <input type="button" id="but_e" value="Остановить Венеру" onClick='toggle("pend1");' />
+    </div>
+    <div>
+      <input type="button" id="but_m" value="Остановить Землю" onClick='toggle("pend2");' />
+    </div>
+    <input type="button" id="but_s" value="Замедлить Землю в 2 раза" onClick='slowdown();' />
+    <div>Скорость вращения Земли:<br>
+		<input type="range" min="0" max="5" value="0" id="intSlider"></div>
+	</div>
+</div>
+    <script type="text/javascript">          
+        $("#intSlider").on('input', function(e, ui) {
+			let speed = 6 - $(this).val();
+            changeSpeed(speed);
+            })
+    </script>
+  </body>
 </html>
